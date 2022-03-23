@@ -1,7 +1,7 @@
 import Tools.Log;
 import org.junit.jupiter.api.Test;
 
-public class logMessageTest {
+public class LogMessageTest {
 
     @Test
     public void testLogMessageDoesNotThrowAnException() {

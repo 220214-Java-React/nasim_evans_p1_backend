@@ -2,9 +2,7 @@ import Tools.ConnectionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
-
-public class getConnectionTest {
+public class GetConnectionTest {
 
 
     @Test
