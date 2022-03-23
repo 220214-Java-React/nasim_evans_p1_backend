@@ -1,6 +1,10 @@
 .gradle
 .idea
 gradle
+build
+build.gradle
 gradlew
 gradlew.bat
 settings.gradle
+debug.txt
+.DS_Store
