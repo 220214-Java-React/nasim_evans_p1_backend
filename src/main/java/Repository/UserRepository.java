@@ -3,6 +3,7 @@ package Repository;
 
 import Model.User;
 import Tools.ConnectionFactory;
+import Tools.Log;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -48,10 +49,10 @@ public class UserRepository {
     }
 
     public boolean checkLogin(String username, String password){
-
+        
         try (Connection connection = ConnectionFactory.getConnection()) {
 
-            String sql = "select id, username,password from users where userName=?"; //SQL-query
+            String sql = "select * from users where username=?"; //SQL-query
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setString(1, username);
