@@ -9,8 +9,8 @@ public class LoginTests {
     @Test
     public void testThatUserIsFoundWithCorrectCredentials() {
         UserRepository ur = new UserRepository();
-       // User user = ur.checkLogin("admin1", "password");
-       // Assertions.assertEquals("admin1", user.getUserName());
+        Boolean userTruth = ur.checkLogin("admin1", "password");
+        Assertions.assertEquals("admin1", userTruth);
     }
 
     @Test
