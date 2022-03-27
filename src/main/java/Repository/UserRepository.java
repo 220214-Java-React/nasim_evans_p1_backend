@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
 
@@ -46,6 +48,27 @@ public class UserRepository {
         //
         return new User();
 
+    }
+
+
+    public List<User> getAll(){
+        List<User> users = new ArrayList<>();
+
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "select * from users";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            ResultSet resultSet = stmt.executeQuery();
+
+            while(resultSet.next()){
+                users.add(new User(
+                        resultSet.getString("username"),
+                        resultSet.getString("password")));
+            }
+        } catch (Exception e) {
+            //logger.warn(e);
+        }
+        return users;
     }
 
 

@@ -7,14 +7,20 @@ import Tools.Log;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class UserServices {
 
     private final MessageDigest messageDigest;
+    UserRepository userRepository = new UserRepository();
 
 
     public UserServices () throws NoSuchAlgorithmException {
         this.messageDigest = MessageDigest.getInstance("SHA-512");
+    }
+
+    public List<User> getAll() {
+        return userRepository.getAll();
     }
 
 
