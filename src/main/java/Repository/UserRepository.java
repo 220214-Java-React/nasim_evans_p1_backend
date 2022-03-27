@@ -4,8 +4,7 @@ package Repository;
 import Model.User;
 import Tools.ConnectionFactory;
 import Tools.Log;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
 
 
 import java.sql.Connection;
@@ -15,76 +14,41 @@ import java.sql.SQLException;
 
 public class UserRepository {
 
-    User user;
-
-    private static final Logger logger = LogManager.getLogger(ConnectionFactory.class);
-    public User currentUser;
 
     //  This method populates a new row in the SQL database
     //  under each specific column with user-inputted data from register() method
 
-    public User createUser(String username, String password){
-        User user = null;
+    public static void createUser(String username, String password){
 
-        try (Connection connection = ConnectionFactory.getConnection()) {
-            String sql = "insert into users(username, password) values (?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+    }
 
-            stmt.setString(1, username);
-            stmt.setString(2, password);
+    public static User login(String username, String password){
+        Connection connection;
 
-            ResultSet resultSet = stmt.executeQuery();
+        try {
+            connection = ConnectionFactory.getConnection();
 
-            if(resultSet.next()){
-                user = new User(
-                        resultSet.getString("username"),
-                        resultSet.getString("password")
+            String statment = "select * from ers_users where username = ? and password = ?";
+            PreparedStatement sqlQuery = connection.prepareStatement(statment);
+            sqlQuery.setString(1, username);
+            sqlQuery.setString(2, password);
 
-                );
+
+            ResultSet resultSet = sqlQuery.executeQuery();
+
+            if (resultSet.next()) {
+                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getBoolean(7), resultSet.getString(8));
             }
         } catch (SQLException e) {
-            logger.warn(e.getMessage(), e);
+            Log.logMessage("warn", e.getMessage());
         }
-        return user;
+
+        //
+        return new User();
+
     }
 
-    public boolean checkLogin(String username, String password){
-        
-        try (Connection connection = ConnectionFactory.getConnection()) {
 
-            String sql = "select * from users where username=?"; //SQL-query
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, username);
-
-            ResultSet rs = stmt.executeQuery();
-
-            //Pull info from columns in table and assign to variables
-            String orgUname = "", orPass = "";
-            int orgId = 0;
-            Double orBal = 0.00;
-
-            while (rs.next()) {
-                orgId = rs.getInt("id");
-                orgUname = rs.getString("username");
-                orPass = rs.getString("password");
-
-            }
-
-            //password validation
-            if (orPass.equals(password)) {
-
-                User dbUser = new User(orgUname, orPass); //creates an object to store table info from DB
-                currentUser = dbUser; //converts object to be used in other packages/classes for convenience
-                return true;
-            } else {
-                System.out.println("Invalid username or password.");
-            }
-        }
-        catch (Exception e) {
-        }
-        return false;
-    }
 
 
 }

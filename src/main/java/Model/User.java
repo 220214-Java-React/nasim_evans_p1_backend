@@ -10,6 +10,9 @@ public class User {
     private boolean isActive = false;
     private String role = "";
 
+
+    public User () {}
+
     //Sign in Constructor
     public User(String username, String password) {
 
@@ -18,7 +21,7 @@ public class User {
 
     }
 
-    public User(int userId, String userName, String userPassword, String email, String firstName, String lastName, boolean isActive, String role) {
+    public User(int userId, String userName, String email, String userPassword, String firstName, String lastName, boolean isActive, String role) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;

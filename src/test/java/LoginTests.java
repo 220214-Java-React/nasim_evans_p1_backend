@@ -1,34 +1,18 @@
 import Model.User;
 import Repository.UserRepository;
+import Service.UserServices;
+import Tools.Log;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 public class LoginTests {
-
-
+    
     @Test
-    public void testThatUserIsFoundWithCorrectCredentials() {
-        UserRepository ur = new UserRepository();
-        Boolean userTruth = ur.checkLogin("admin1", "password");
-        Assertions.assertEquals("admin1", userTruth);
+    public void testThatUserRepositoryReturnsAdmin1User() {
+        User user = UserRepository.login("admin1", "password");
+        Assertions.assertEquals("admin1", user.getUserName());
     }
-
-    @Test
-    public void testThatUserIsNotFoundBecauseOfIncorrectUserName() {
-        UserRepository ur = new UserRepository();
-       // User user = ur.checkLogin("admin", "password");
-      //  Assertions.assertEquals(null, user.getUserName());
-    }
-
-    @Test
-    public void testThatUserIsNotFoundBecauseOfIncorrectPassword() {
-        UserRepository ur = new UserRepository();
-      //  User user = ur.checkLogin("admin1", "passord");
-      //  Assertions.assertEquals(null, user.getUserName());
-    }
-
-
-    //@Test
-    //public void testThatUserIsFoundWithCorrectCredentialsButIsDeniedAccessByAdmin() {}
 
 }
