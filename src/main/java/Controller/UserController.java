@@ -7,7 +7,9 @@ import Model.User;
 import Service.UserServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * The UserController servlet will expose an endpoint to manipulate the User resource
  */
-
+@WebServlet(urlPatterns = {"/index"})
 public class UserController extends HttpServlet {
 
 
