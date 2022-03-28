@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Enums.Role;
+
 public class User {
     private int userId = 0;
     private String userName = "";
@@ -8,20 +10,24 @@ public class User {
     private String firstName = "";
     private String lastName = "";
     private boolean isActive = false;
-    private String role = "";
+    private Role role;
 
 
     public User () {}
 
-    //Sign in Constructor
-    public User(String username, String password) {
-
+    //Sign up Constructor
+    public User(String username, String email, String password, String firstName, String lastName, Role role) {
         this.userName = username;
         this.userPassword = password;
-
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isActive = false;
+        this.role = role;
     }
 
-    public User(int userId, String userName, String email, String userPassword, String firstName, String lastName, boolean isActive, String role) {
+    //login constructor
+    public User(int userId, String userName, String email, String userPassword, String firstName, String lastName, boolean isActive, Role role) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -88,19 +94,25 @@ public class User {
         isActive = active;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", role=" + role +
                 '}';
     }
 }
