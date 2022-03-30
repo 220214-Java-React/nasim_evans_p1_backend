@@ -23,17 +23,9 @@ public class LoginController extends HttpServlet {
 
 
     //private static final Log logger = LogManager.getLogger(UserController.class);
-    private static final ObjectMapper mapper = new ObjectMapper();
-    private static UserServices userService;
-    
 
-    static {
-        try {
-            userService = new UserServices();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
+    private static UserServices userService;
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,18 +43,18 @@ public class LoginController extends HttpServlet {
 
         Log.setupLogger();
         try {
-            System.out.println(req.getQueryString().split("&")[0]);
+            try {
+                userService = new UserServices();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
 
-            String username = req.getParameter("username");
+            String username = req.getQueryString().split("&")[0].split("=")[1];
 //            Log.logMessage("info", username);
-            String password = req.getParameter("password");
+            String password = req.getQueryString().split("&")[1].split("=")[1];
 //            Log.logMessage("info", password);
-            User user = new User();
-            user.setUserName(username);
-            user.setUserPassword(password);
-            userService.login(user);
 
-            String JSON = mapper.writeValueAsString(user);
+            String JSON = userService.login(username, password);;
 
             resp.setContentType("application/json");
             resp.getOutputStream().println(JSON);

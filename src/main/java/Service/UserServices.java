@@ -6,8 +6,10 @@ import Repository.UserRepository;
 import Tools.Log;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +18,7 @@ import java.util.List;
 public class UserServices {
 
     private final BCrypt.Hasher hasher;
-
+    private final ObjectMapper mapper = new ObjectMapper();
 
 
     public UserServices () throws NoSuchAlgorithmException {
@@ -28,31 +30,18 @@ public class UserServices {
     }
 
 
-    public User login(User user) {
+    public String login(String username, String password) throws IOException {
         // get a user from the user repository using username and secured password
+        User user = new User(username, password);
+
         if (!user.getUserPassword().equals("password")) {
             user.setUserPassword(securePassword(user.getUserPassword()));
         }
         System.out.println(user);
         user = UserRepository.login(user);
         System.out.println(user);
-//        //The userId should not be 0 if a user was found
-//        if (user.getUserId() != 0) {
-//            Log.logMessage("info", "User found" + user.getUserName());
-//
-//            //user should not be able to login if user is inactive
-//            if (user.isActive() == false) {
-//                //sign user in by returning user
-//                //user = new User();
-//            } else {
-//                Log.logMessage("Info", "users account is inactive");
-//            }
-//        }else {
-//            //user = new User();
-//            Log.logMessage("Info", "User Not Found");
-//        }
 
-        return user;
+        return mapper.writeValueAsString(user);
     }
 
     public boolean createUser(String username, String email, String password, String firstName, String lastName, Role role) {
