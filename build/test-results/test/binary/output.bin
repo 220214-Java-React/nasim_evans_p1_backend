@@ -1,0 +1,4 @@
+ÞUser{userId=0, userName='admin4', userPassword='$2a$04$X8ch6x2B06elh2iJK2UIa.HEf.1Hqv2936QbAJcG82EHAL8q3BlJy', email='admin4@adminSite.com', firstName='adman', lastName='strongtooth', isActive=false, role=FINACIALMANAGER}
+DEBUG
+DEBUG
+ŽUser{userId=1, userName='admin1', userPassword='password', email='ad1@hello.com', firstName='ada', lastName='min', isActive=true, role=ADMIN}

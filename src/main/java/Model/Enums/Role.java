@@ -2,7 +2,7 @@ package Model.Enums;
 
 public enum Role {
     ADMIN("admin"),
-    FINACIALMANAGER("finacialmanager"),
+    FINANCIALMANAGER("financialmanager"),
     EMPLOYEE("employee");
 
     public final String value;
