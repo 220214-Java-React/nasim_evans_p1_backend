@@ -6,6 +6,8 @@ import Repository.UserRepository;
 import Tools.Log;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,38 +28,31 @@ public class UserServices {
     }
 
 
-    public boolean login(String username, String password) {
+    public User login(User user) {
         // get a user from the user repository using username and secured password
-        User user;
-
-        if (password.equals("password")) {
-            user = UserRepository.login(username, password);
-        } else {
-            user = UserRepository.login(username, securePassword(password));
+        if (!user.getUserPassword().equals("password")) {
+            user.setUserPassword(securePassword(user.getUserPassword()));
         }
+        System.out.println(user);
+        user = UserRepository.login(user);
+        System.out.println(user);
+//        //The userId should not be 0 if a user was found
+//        if (user.getUserId() != 0) {
+//            Log.logMessage("info", "User found" + user.getUserName());
+//
+//            //user should not be able to login if user is inactive
+//            if (user.isActive() == false) {
+//                //sign user in by returning user
+//                //user = new User();
+//            } else {
+//                Log.logMessage("Info", "users account is inactive");
+//            }
+//        }else {
+//            //user = new User();
+//            Log.logMessage("Info", "User Not Found");
+//        }
 
-        //The userId should not be 0 if a user was found
-        if (user.getUserId() != 0) {
-            Log.logMessage("info", "User found");
-
-            System.out.println(user);
-
-            //user should not be able to login if user is inactive
-            if (user.isActive() == true) {
-                //sign user in by sending data to Front-End
-
-
-                //return true for testing purposes
-                return true;
-            } else {
-                Log.logMessage("Info", "users account is inactive");
-            }
-        }else {
-            Log.logMessage("Info", "User Not Found");
-        }
-
-        // by this point it is clear login failed
-        return false;
+        return user;
     }
 
     public boolean createUser(String username, String email, String password, String firstName, String lastName, Role role) {

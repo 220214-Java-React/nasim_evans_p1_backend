@@ -4,8 +4,8 @@ import Model.Enums.Role;
 
 public class User {
     private int userId = 0;
-    private String userName = "";
-    private String userPassword = "";
+    private String username = "";
+    private String password = "";
     private String email = "";
     private String firstName = "";
     private String lastName = "";
@@ -15,10 +15,15 @@ public class User {
 
     public User () {}
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     //Sign up Constructor
     public User(String username, String email, String password, String firstName, String lastName, Role role) {
-        this.userName = username;
-        this.userPassword = password;
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,11 +31,10 @@ public class User {
         this.role = role;
     }
 
-    //login constructor
-    public User(int userId, String userName, String email, String userPassword, String firstName, String lastName, boolean isActive, Role role) {
+    public User(int userId, String username, String password, String email, String firstName, String lastName, boolean isActive, Role role) {
         this.userId = userId;
-        this.userName = userName;
-        this.userPassword = userPassword;
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,19 +51,19 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return password;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.password = userPassword;
     }
 
     public String getEmail() {
@@ -106,8 +110,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
+                ", userName='" + username + '\'' +
+                ", userPassword='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

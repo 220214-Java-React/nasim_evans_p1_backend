@@ -59,7 +59,7 @@ public class UserRepository {
         return false;
     }
 
-    public static User login(String username, String password){
+    public static User login(User user){
         Connection connection;
 
         try {
@@ -67,28 +67,26 @@ public class UserRepository {
 
             String statement = "select * from ers_users where username = ? and password = ?";
             PreparedStatement sqlQuery = connection.prepareStatement(statement);
-            sqlQuery.setString(1, username);
-            sqlQuery.setString(2, password);
+            sqlQuery.setString(1, user.getUserName());
+            sqlQuery.setString(2, user.getUserPassword());
 
 
             ResultSet resultSet = sqlQuery.executeQuery();
 
             if (resultSet.next()) {
-                return new User(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getBoolean(7),
-                        Role.values()[resultSet.getInt(8)]);
+                user.setUserId(resultSet.getInt("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setActive(resultSet.getBoolean("is_active"));
+                user.setRole(Role.values()[resultSet.getInt("role_id")]);
             }
         } catch (SQLException e) {
             Log.logMessage("warn", e.getMessage());
         }
-
+        System.out.println(user);
         //
-        return new User();
+        return user;
 
     }
 
