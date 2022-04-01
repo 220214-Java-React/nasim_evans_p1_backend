@@ -1,10 +1,10 @@
-package Repository;
+package com.revature.Repository;
 
 
-import Model.Enums.Role;
-import Model.User;
-import Tools.ConnectionFactory;
-import Tools.Log;
+import com.revature.Model.Enums.Role;
+import com.revature.Model.User;
+import com.revature.Tools.ConnectionFactory;
+import com.revature.Tools.Log;
 
 
 
@@ -13,13 +13,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserRepository {
 
 
     //  This method populates a new row in the SQL database
     //  under each specific column with user-inputted data from register() method
+
+
+
 
     public static boolean createUser(User user){
         Connection connection;
@@ -30,9 +32,9 @@ public class UserRepository {
             // try to create a user with given credentials
             String statement = "insert into ers_users (username, email, password, first_name, last_name, is_active, role_id) values (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement sqlInsert = connection.prepareStatement(statement);
-            sqlInsert.setString(1,user.getUserName());
+            sqlInsert.setString(1,user.getUsername());
             sqlInsert.setString(2, user.getEmail());
-            sqlInsert.setString(3,user.getUserPassword());
+            sqlInsert.setString(3,user.getPassword());
             sqlInsert.setString(4, user.getFirstName());
             sqlInsert.setString(5, user.getLastName());
             sqlInsert.setBoolean(6, user.isActive());
@@ -43,8 +45,8 @@ public class UserRepository {
             //now we look for the just created user to see if it was created
             String statement2 = "select * from ers_users where username = ? and password = ?";
             PreparedStatement sqlQuery = connection.prepareStatement(statement2);
-            sqlQuery.setString(1, user.getUserName());
-            sqlQuery.setString(2, user.getUserPassword());
+            sqlQuery.setString(1, user.getUsername());
+            sqlQuery.setString(2, user.getPassword());
 
 
             ResultSet resultSet = sqlQuery.executeQuery();
@@ -52,14 +54,14 @@ public class UserRepository {
                 return true;
             }
 
-        } catch (SQLException e) {
-            Log.setupLogger();
-            Log.logMessage("warn", e.getMessage());
+            } catch (SQLException e) {
+                Log.setupLogger();
+                Log.logMessage("warn", e.getMessage());
+            }
+            return false;
         }
-        return false;
-    }
 
-    public static User login(User user){
+    public User login(User user){
         Connection connection;
 
         try {
@@ -67,8 +69,8 @@ public class UserRepository {
 
             String statement = "select * from ers_users where username = ? and password = ?";
             PreparedStatement sqlQuery = connection.prepareStatement(statement);
-            sqlQuery.setString(1, user.getUserName());
-            sqlQuery.setString(2, user.getUserPassword());
+            sqlQuery.setString(1, user.getUsername());
+            sqlQuery.setString(2, user.getPassword());
 
 
             ResultSet resultSet = sqlQuery.executeQuery();
@@ -91,7 +93,7 @@ public class UserRepository {
     }
 
 
-    public static ArrayList<User> getAll(){
+    public ArrayList<User> getAll(){
         ArrayList<User> users = new ArrayList<>();
 
         try(Connection connection = ConnectionFactory.getConnection()){

@@ -1,6 +1,5 @@
-package Model;
-
-import Model.Enums.Role;
+package com.revature.Model;
+import com.revature.Model.Enums.Role;
 
 public class User {
     private int userId = 0;
@@ -50,19 +49,19 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUserName(String userName) {
+    public void setUsername(String userName) {
         this.username = userName;
     }
 
-    public String getUserPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setUserPassword(String userPassword) {
+    public void setPassword(String userPassword) {
         this.password = userPassword;
     }
 
@@ -119,4 +118,16 @@ public class User {
                 ", role=" + role +
                 '}';
     }
+
+    public void nullify() {
+        this.setUserId(0);
+        this.setUsername(null);
+        this.setPassword(null);
+        this.setEmail(null);
+        this.setFirstName(null);
+        this.setLastName(null);
+        this.setActive(false);
+        this.setRole(null);
+    }
+
 }

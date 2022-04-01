@@ -1,4 +1,4 @@
-import Tools.Log;
+import com.revature.Tools.Log;
 import org.junit.jupiter.api.Test;
 
 public class LogMessageTest {

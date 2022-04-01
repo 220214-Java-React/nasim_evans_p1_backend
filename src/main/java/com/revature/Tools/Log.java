@@ -1,4 +1,4 @@
-package Tools;
+package com.revature.Tools;
 
 import org.apache.log4j.*;
 import org.apache.log4j.FileAppender;

@@ -1,4 +1,4 @@
-package Tools;
+package com.revature.Tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ public class ConnectionFactory {
 
     private static Connection connection;
 
-    private static final String url = "jdbc:postgresql://java-react.cewgx1k1p4rc.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=project1";
+    private static final String url = "jdbc:postgresql://java-react.cewgx1k1p4rc.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=projectone";
     private static final String username = "postgres";
     private static final String password = "sJits7549!";
 
@@ -18,6 +18,11 @@ public class ConnectionFactory {
     //            creates a connection to the database first time called
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             connection = DriverManager.getConnection(url, username, password);
         }
 

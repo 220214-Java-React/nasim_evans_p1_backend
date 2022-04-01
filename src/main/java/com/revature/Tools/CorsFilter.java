@@ -1,4 +1,4 @@
-package Tools;
+package com.revature.Tools;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.*;
 import java.io.IOException;

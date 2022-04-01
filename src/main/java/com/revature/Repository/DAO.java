@@ -1,4 +1,4 @@
-package Repository;
+package com.revature.Repository;
 
 import java.util.List;
 

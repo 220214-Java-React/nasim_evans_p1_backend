@@ -1,59 +1,44 @@
-import Model.Enums.Role;
-import Model.User;
-import Repository.UserRepository;
-import Service.UserServices;
-import Tools.Log;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.revature.Model.Enums.Role;
+import com.revature.Model.User;
+import com.revature.Repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.Service.UserServices;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class LoginTests {
     public static ObjectMapper mapper = new ObjectMapper();
+    UserRepository userRepository = new UserRepository();
 //User Repository Tests
     @Test
     public void testThatUserRepositoryReturnsAdmin1User() {
         User user = new User("admin1", "password");
-        UserRepository.login(user);
+        user = userRepository.login(user);
         Assertions.assertEquals(1, user.getUserId());
     }
-    @Test
-    public void testThatGetAllUsersWorks() {
-        ArrayList<User> users = UserRepository.getAll();
-        Assertions.assertEquals(4, users.size());
-    }
-
-//UserServices Tests
 //    @Test
-//    public void testThatUserServiceLoginWorks() {
-//        Log.setupLogger();
-//        try {
-//            UserServices us = new UserServices();
-//            User user = new User("admin1", "password");
-//            us.login(user);
-//            System.out.println(mapper.writeValueAsString(user));
-//            Assertions.assertEquals(true, user.getUserId() == 1);
-//        } catch(NoSuchAlgorithmException e) {
-//            Log.logMessage("warn", e.getMessage());
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
+//    public void testThatGetAllUsersWorks() {
+//        ArrayList<User> users = userRepository.getAll();
+//        Assertions.assertEquals(4, users.size());
 //    }
 
+//UserServices Tests
+    @Test
+    public void testThatUserServiceLoginWorks() {
+
+
+        UserServices us = new UserServices();
+        User user = new User("evans", "brett");
+
+        System.out.println();
+        Assertions.assertEquals(18, us.login(user).getUserId());
+
+    }
+//
     @Test
     public void testThatUserServiceCreateUserWorks() {
-        try {
-            UserServices userService = new UserServices();
-
-            Assertions.assertEquals(true, userService.createUser("admin5", "admin5@adminSite.com", "brett12345", "adman", "strongtooth", Role.FINANCIALMANAGER));
-        } catch (NoSuchAlgorithmException e) {
-            Log.setupLogger();
-            Log.logMessage("warn", e.getMessage());
-        }
+        UserServices userService = new UserServices();
+        Assertions.assertEquals(true, userService.createUser("evans", "buttercup@outlokk.com", "brett", "adman", "strongtooth", Role.EMPLOYEE));
     }
 
 

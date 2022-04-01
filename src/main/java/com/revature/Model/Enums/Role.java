@@ -1,9 +1,10 @@
-package Model.Enums;
+package com.revature.Model.Enums;
 
 public enum Role {
     ADMIN("admin"),
     FINANCIALMANAGER("financialmanager"),
-    EMPLOYEE("employee");
+    EMPLOYEE("employee"),
+    EMPTY("empty");
 
     public final String value;
 
