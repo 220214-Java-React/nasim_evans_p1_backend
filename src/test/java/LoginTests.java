@@ -6,6 +6,8 @@ import com.revature.Service.UserServices;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class LoginTests {
     public static ObjectMapper mapper = new ObjectMapper();
     UserRepository userRepository = new UserRepository();
@@ -16,17 +18,15 @@ public class LoginTests {
         user = userRepository.login(user);
         Assertions.assertEquals(1, user.getUserId());
     }
-//    @Test
-//    public void testThatGetAllUsersWorks() {
-//        ArrayList<User> users = userRepository.getAll();
-//        Assertions.assertEquals(4, users.size());
-//    }
+    @Test
+    public void testThatGetAllUsersWorks() {
+        ArrayList<User> users = userRepository.getAll();
+        Assertions.assertEquals(10, users.size());
+    }
 
 //UserServices Tests
     @Test
     public void testThatUserServiceLoginWorks() {
-
-
         UserServices us = new UserServices();
         User user = new User("evans", "brett");
 

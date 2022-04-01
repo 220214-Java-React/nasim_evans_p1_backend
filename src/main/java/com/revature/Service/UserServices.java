@@ -36,11 +36,11 @@ public class UserServices {
         System.out.println(user);
         user = userRepository.login(user);
 
-//        if (user.getUserId() == 0) {
-//
-//            user.nullify();
-//
-//        }
+        if (user.getUserId() == 0) {
+
+            user.nullify();
+
+        }
 
         return user;
     }
