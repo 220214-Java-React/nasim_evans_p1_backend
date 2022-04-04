@@ -95,6 +95,7 @@ public class ReimbursementRepository {
         return reimbList;
     }
 
+
     public ArrayList<Reimbursement> getAllHistoryByUserId (int userId) {
         Connection connection;
         ArrayList<Reimbursement> reimbList = new ArrayList<>();
@@ -122,6 +123,76 @@ public class ReimbursementRepository {
                         ReimbursementStatus.values()[resultSet.getInt("status_id")],
                         ReimbursementType.values()[resultSet.getInt("type_id")]));
             }
+        } catch (SQLException e) {
+            Log.setupLogger();
+            Log.logMessage("warn", e.getMessage());
+        }
+
+        return reimbList;
+    }
+
+
+    public ArrayList<Reimbursement> getAllHistoryByManagerId(int managerId) {
+        Connection connection;
+        ArrayList<Reimbursement> reimbList = new ArrayList<>();
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            String sqlString = "select * from ers_reimbursements where resolver_id = ? and (status_id = '1' or status_id = '2')";
+
+            PreparedStatement statement = connection.prepareStatement(sqlString);
+            statement.setInt(1, managerId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                reimbList.add(new Reimbursement(resultSet.getInt("reimb_id"),
+                        resultSet.getDouble("amount"),
+                        String.valueOf(resultSet.getTimestamp("submitted")),
+                        String.valueOf(resultSet.getTimestamp("resolved")),
+                        resultSet.getString("description"),
+                        resultSet.getBytes("receipt"),
+                        resultSet.getInt("author_id"),
+                        resultSet.getInt("resolver_id"),
+                        ReimbursementStatus.values()[resultSet.getInt("status_id")],
+                        ReimbursementType.values()[resultSet.getInt("type_id")]));
+            }
+        } catch (SQLException e) {
+            Log.setupLogger();
+            Log.logMessage("warn", e.getMessage());
+        }
+
+        return reimbList;
+    }
+
+    public ArrayList<Reimbursement> getAllPending () {
+        Connection connection;
+        ArrayList<Reimbursement> reimbList = new ArrayList<>();
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            String sqlString = "select * from ers_reimbursements where status_id = '0'";
+            PreparedStatement statement = connection.prepareStatement(sqlString);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                reimbList.add(new Reimbursement(resultSet.getInt("reimb_id"),
+                        resultSet.getDouble("amount"),
+                        String.valueOf(resultSet.getTimestamp("submitted")),
+                        String.valueOf(resultSet.getTimestamp("resolved")),
+                        resultSet.getString("description"),
+                        resultSet.getBytes("receipt"),
+                        resultSet.getInt("author_id"),
+                        resultSet.getInt("resolver_id"),
+                        ReimbursementStatus.values()[resultSet.getInt("status_id")],
+                        ReimbursementType.values()[resultSet.getInt("type_id")]));
+            }
+
+
         } catch (SQLException e) {
             Log.setupLogger();
             Log.logMessage("warn", e.getMessage());

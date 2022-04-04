@@ -28,7 +28,6 @@ public class EmployeeHistoryController extends HttpServlet {
             ArrayList<Reimbursement> reimbursementsList = employeeServices.getAllUsersHistory(userId);
 
             String json = mapper.writeValueAsString(reimbursementsList);
-
             resp.setStatus(200);
             resp.setContentType("application/json");
             resp.getOutputStream().println(json);
