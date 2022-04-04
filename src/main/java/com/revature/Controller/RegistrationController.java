@@ -27,11 +27,9 @@ public class RegistrationController extends HttpServlet {
         Log.setupLogger();
 
         String givenJson = req.getReader().lines().collect(Collectors.joining());
-        System.out.println(givenJson);
 
         User user = mapper.readValue(givenJson, User.class);
-        System.out.println("the user is : " + user.toString());
-        //createUser(String username, String email, String password, String firstName, String lastName, Role role)
+
         userService.createUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getRole());
         user = userService.login(user);
 

@@ -3,15 +3,21 @@ package com.revature.Model;
 import com.revature.Model.Enums.ReimbursementStatus;
 import com.revature.Model.Enums.ReimbursementType;
 
+import java.awt.*;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Reimbursement {
+    private SimpleDateFormat dateControl = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss");
 
     private int reimbursementId;
     private double amount;
-    private Calendar timeSubmitted;
-    private Calendar timeResolved;
+    private String timeSubmitted;
+    private String timeResolved;
     private String description;
     private byte[] receipt;
     private int userId;
@@ -19,36 +25,23 @@ public class Reimbursement {
     private ReimbursementStatus status;
     private ReimbursementType type;
 
-    //basic ReimbursementCreation
-    public Reimbursement(double amount, Calendar timeSubmitted, String description, int userId, ReimbursementStatus status, ReimbursementType type) {
-        this.amount = amount;
-        this.timeSubmitted = timeSubmitted;
-        this.description = description;
-        this.userId = userId;
-        this.status = status;
-        this.type = type;
-    }
 
-    //advanced Reimbursement creation
-    public Reimbursement(double amount, Calendar timeSubmitted, String description, byte[] receipt, int userId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement() {}
+
+    //Get Reimbursement Full
+    public Reimbursement(int reimbursementId, double amount, Date timeSubmitted, Date timeResolved, String description, byte[] receipt, int userId, int managerId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbursementId = reimbursementId;
         this.amount = amount;
-        this.timeSubmitted = timeSubmitted;
+        this.timeSubmitted = dateControl.format(timeSubmitted);
+        this.timeResolved = dateControl.format(timeResolved);
         this.description = description;
         this.receipt = receipt;
         this.userId = userId;
+        this.managerId = managerId;
         this.status = status;
         this.type = type;
     }
-
-    //resolving constructor
-    public Reimbursement(Calendar timeResolved, int managerId, ReimbursementStatus status) {
-        this.timeResolved = timeResolved;
-        this.managerId = managerId;
-        this.status = status;
-    }
-
-    //Get Reimbursement Full
-    public Reimbursement(int reimbursementId, double amount, Calendar timeSubmitted, Calendar timeResolved, String description, byte[] receipt, int userId, int managerId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(int reimbursementId, double amount, String timeSubmitted, String timeResolved, String description, byte[] receipt, int userId, int managerId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbursementId = reimbursementId;
         this.amount = amount;
         this.timeSubmitted = timeSubmitted;
@@ -62,8 +55,6 @@ public class Reimbursement {
     }
 
     //getters and setters
-
-
     public int getReimbursementId() {
         return reimbursementId;
     }
@@ -80,19 +71,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public Calendar getTimeSubmitted() {
+    public String getTimeSubmitted() {
         return timeSubmitted;
     }
 
-    public void setTimeSubmitted(Calendar timeSubmitted) {
+    public void setTimeSubmitted(String timeSubmitted) {
         this.timeSubmitted = timeSubmitted;
     }
 
-    public Calendar getTimeResolved() {
+    public String getTimeResolved() {
         return timeResolved;
     }
 
-    public void setTimeResolved(Calendar timeResolved) {
+    public void setTimeResolved(String timeResolved) {
         this.timeResolved = timeResolved;
     }
 
