@@ -10,6 +10,7 @@ public class User {
     private String lastName = "";
     private boolean isActive = false;
     private Role role;
+    private int adminId;
 
 
     public User () {}
@@ -30,7 +31,7 @@ public class User {
         this.role = role;
     }
 
-    public User(int userId, String username, String password, String email, String firstName, String lastName, boolean isActive, Role role) {
+    public User(int userId, String username, String password, String email, String firstName, String lastName, boolean isActive, Role role, int adminId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -39,6 +40,7 @@ public class User {
         this.lastName = lastName;
         this.isActive = isActive;
         this.role = role;
+        this.adminId = adminId;
     }
 
     public int getUserId() {
@@ -105,19 +107,29 @@ public class User {
         this.role = role;
     }
 
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", userName='" + username + '\'' +
-                ", userPassword='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", isActive=" + isActive +
                 ", role=" + role +
+                ", adminId=" + adminId +
                 '}';
     }
+
 
     public void nullify() {
         this.setUserId(0);

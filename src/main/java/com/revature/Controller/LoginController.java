@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
                 resp.setContentType("application/json");
                 resp.getOutputStream().println(respJson);
 
-            }else {
+            } else {
                 resp.setStatus(400);
                 resp.setContentType("application/text");
                 resp.getOutputStream().println("We could not find that user");

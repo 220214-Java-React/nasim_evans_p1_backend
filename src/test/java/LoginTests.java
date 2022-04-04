@@ -18,11 +18,6 @@ public class LoginTests {
         user = userRepository.login(user);
         Assertions.assertEquals(1, user.getUserId());
     }
-    @Test
-    public void testThatGetAllUsersWorks() {
-        ArrayList<User> users = userRepository.getAll();
-        Assertions.assertEquals(10, users.size());
-    }
 
 //UserServices Tests
     @Test

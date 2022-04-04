@@ -24,11 +24,6 @@ public class UserServices {
         }
     }
 
-    public List<User> getAll() {
-        return userRepository.getAll();
-    }
-
-
     public User login(User user) {
         String newPass = securePassword(user.getPassword());
         System.out.println(newPass);
