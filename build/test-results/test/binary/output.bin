@@ -1,4 +1,2 @@
-ÞUser{userId=0, userName='admin4', userPassword='$2a$04$X8ch6x2B06elh2iJK2UIa.HEf.1Hqv2936QbAJcG82EHAL8q3BlJy', email='admin4@adminSite.com', firstName='adman', lastName='strongtooth', isActive=false, role=FINACIALMANAGER}
-DEBUG
-DEBUG
-ŽUser{userId=1, userName='admin1', userPassword='password', email='ad1@hello.com', firstName='ada', lastName='min', isActive=true, role=ADMIN}
+—User{userId=1, username='admin1', password='password', email='ad1@hello.com', firstName='ada', lastName='min', isActive=false, role=ADMIN, adminId=1}
+ÐUser{userId=22, username='mainAd', password='$2a$04$MBLhOFSiXQD/ZSHfbCz.Zey9/eM5eOXUTToMnLCs5FOgB3WoTomUW', email='main@admin.inc', firstName='bruce', lastName='wayne', isActive=true, role=ADMIN, adminId=1}
