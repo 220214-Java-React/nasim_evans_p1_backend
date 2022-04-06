@@ -2,9 +2,9 @@ package com.revature.Model.Enums;
 
 public enum ReimbursementStatus {
 
-    PENDING("pending"),
-    APPROVED("approved"),
-    DENIED("denied");
+    PENDING("PENDING"),
+    APPROVED("APPROVED"),
+    DENIED("DENIED");
 
     public final String value;
 

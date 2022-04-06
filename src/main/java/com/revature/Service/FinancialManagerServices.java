@@ -1,5 +1,6 @@
 package com.revature.Service;
 
+import com.revature.Model.Enums.ReimbursementStatus;
 import com.revature.Model.Reimbursement;
 import com.revature.Repository.ReimbursementRepository;
 
@@ -17,8 +18,8 @@ public class FinancialManagerServices {
         return repository.getAllHistoryByManagerId(managerId);
     }
 
-    public void resolveReimbursement() {
-
+    public void resolveReimbursement(int reimbursementId, String time, int managerId, ReimbursementStatus status) {
+        repository.updateReimbursement(reimbursementId, time, managerId, status);
     }
 
 }

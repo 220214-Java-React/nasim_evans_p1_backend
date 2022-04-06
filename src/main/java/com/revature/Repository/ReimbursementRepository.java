@@ -39,6 +39,29 @@ public class ReimbursementRepository {
         }
     }
 
+    public void updateReimbursement(int reimbursementId ,String time, int managerId, ReimbursementStatus status) {
+        Connection connection;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            String sqlString = "update ers_reimbursements set resolved = ?, status_id = ?, resolver_id = ? where reimb_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sqlString);
+
+            statement.setTimestamp(1, Timestamp.valueOf(time));
+            statement.setInt(2, status.ordinal());
+            statement.setInt(3, managerId);
+            statement.setInt(4, reimbursementId);
+
+
+            statement.executeUpdate();
+
+        }catch (SQLException e) {
+            Log.setupLogger();
+            Log.logMessage("warn", e.getMessage());
+        }
+    }
+
+
     public void deleteRequestById(int reimbursementId) {
         Connection connection;
 

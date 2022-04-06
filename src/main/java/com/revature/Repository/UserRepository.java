@@ -93,8 +93,9 @@ public class UserRepository {
 
     public ArrayList<User> getAllNew(){
         ArrayList<User> users = new ArrayList<>();
-
-        try(Connection connection = ConnectionFactory.getConnection()){
+        Connection connection;
+        try{
+            connection = ConnectionFactory.getConnection();
             String sql = "select * from ers_users where is_active = false and adminid = 0";
             PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -122,8 +123,9 @@ public class UserRepository {
 
     public ArrayList<User> getAllNew(int adminId){
         ArrayList<User> users = new ArrayList<>();
-
-        try(Connection connection = ConnectionFactory.getConnection()){
+        Connection connection;
+        try{
+            connection = ConnectionFactory.getConnection();
             String sql = "select * from ers_users where adminid = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, adminId);

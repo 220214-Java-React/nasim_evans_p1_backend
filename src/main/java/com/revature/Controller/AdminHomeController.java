@@ -39,7 +39,7 @@ public class AdminHomeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String reqString = req.getReader().lines().collect(Collectors.joining());
 
-        String intString = reqString.split("=")[1].substring(2).split("\"")[0];
+        String intString = reqString.split(":")[1].substring(1).split("\"")[0];
 
         ArrayList<User> userList = adminServices.getAllAdminsUsers(Integer.parseInt(intString));
 

@@ -2,10 +2,10 @@ package com.revature.Model.Enums;
 
 public enum ReimbursementType {
 
-    LODGING("lodging"),
-    TRAVEL("travel"),
-    FOOD("food"),
-    OTHER("other");
+    LODGING("LODGING"),
+    TRAVEL("TRAVEL"),
+    FOOD("FOOD"),
+    OTHER("OTHER");
 
     public final String value;
 
