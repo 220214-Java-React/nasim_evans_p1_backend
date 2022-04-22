@@ -41,5 +41,5 @@ Client Tier
 
 Roles:
 
-Brett Evans: Active Developer
+Brett Evans: Active Developer, 
 Jazib Nasim: Active Developer
