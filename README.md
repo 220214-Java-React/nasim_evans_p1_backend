@@ -43,3 +43,10 @@ Roles:
 
 Brett Evans: Active Developer, 
 Jazib Nasim: Active Developer
+
+Links:
+-Backend
+https://github.com/220214-Java-React/nasim_evans_p1_backend
+
+-frontend
+https://github.com/220214-Java-React/nasim_evans_p1_frontend
